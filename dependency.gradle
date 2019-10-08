@@ -1,0 +1,24 @@
+ext.versions = [
+        project_group    : "com.zxk175",
+        project_version  : "1.0.0",
+        project_encoding : "UTF-8",
+
+        spring_boot      : "2.1.9.RELEASE",
+
+        mysql_java       : "8.0.16",
+        boot_mybatis_plus: "3.2.0",
+
+        hutool           : "4.6.8",
+]
+
+ext.libraries = [
+        lombok          : "org.projectlombok:lombok",
+
+        boot_freemarker : "org.springframework.boot:spring-boot-starter-freemarker",
+        boot_test       : "org.springframework.boot:spring-boot-starter-test",
+
+        mysql_java      : "mysql:mysql-connector-java:${versions.mysql_java}",
+        mybatis_plus_gen: "com.baomidou:mybatis-plus-generator:${versions.boot_mybatis_plus}",
+
+        hutool_core     : "cn.hutool:hutool-core:${versions.hutool}",
+]
