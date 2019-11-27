@@ -56,5 +56,6 @@ dependencies {
             libraries.hutool_core,
     ])
 
+    testImplementation  libraries.mysql_java
     testImplementation  libraries.boot_test
 }

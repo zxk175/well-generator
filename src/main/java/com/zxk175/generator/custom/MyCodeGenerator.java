@@ -185,7 +185,7 @@ public class MyCodeGenerator {
     private StrategyConfig strategyConfig() {
         StrategyConfig strategy = new StrategyConfig();
         // 表前缀
-        strategy.setTablePrefix("t_", "alk_");
+        strategy.setTablePrefix("t_");
         // 驼峰转连字符
         strategy.setControllerMappingHyphenStyle(true);
         // 表名生成策略
