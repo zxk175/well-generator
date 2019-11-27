@@ -43,21 +43,21 @@ public class MyCodeGenerator {
     private GlobalConfig globalConfig;
     private String controllerBasePath;
     private String templateBasePath;
-    private String javaBasePath;
+    private String packageBasePath;
     private String javaPath;
     private String xmlPath;
     private String[] include;
 
 
-    public MyCodeGenerator(String basePath, String javaBasePath, String controllerBasePath, String templateBasePath, List<String> include, DataSourceConfig dataSourceConfig, MyPackageConfig myPackageConfig, StrategyConfig strategyConfig, GlobalConfig globalConfig) {
+    public MyCodeGenerator(String basePath, String packageBasePath, String controllerBasePath, String templateBasePath, List<String> include, DataSourceConfig dataSourceConfig, MyPackageConfig myPackageConfig, StrategyConfig strategyConfig, GlobalConfig globalConfig) {
         this.dataSourceConfig = dataSourceConfig;
         this.myPackageConfig = myPackageConfig;
         this.strategyConfig = strategyConfig;
         this.globalConfig = globalConfig;
         this.controllerBasePath = controllerBasePath;
         this.templateBasePath = templateBasePath;
-        this.javaBasePath = javaBasePath;
-        this.javaPath = basePath + "/java/" + javaBasePath;
+        this.packageBasePath = packageBasePath;
+        this.javaPath = basePath + "/java/" + packageBasePath;
         this.xmlPath = basePath + "/resources/";
         this.include = CollUtil.isEmpty(include) ? null : include.toArray(new String[0]);
     }
@@ -112,6 +112,8 @@ public class MyCodeGenerator {
         mpg.setTemplateEngine(new MyFreemarkerTemplateEngine());
 
         mpg.execute();
+
+        System.out.println("\n=======>代码根路径：" + this.getJavaPath() + "\n");
 
         System.exit(0);
     }
@@ -224,7 +226,7 @@ public class MyCodeGenerator {
             @Override
             public void initMap() {
                 Map<String, Object> map = new HashMap<>(8);
-                map.put("since", LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+                map.put("since", LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
                 this.setMap(map);
             }
         };
@@ -240,13 +242,13 @@ public class MyCodeGenerator {
         MyPackageConfig packageConfig = packageConfig();
         MyTemplateConfig templateConfig = templateConfig(false);
 
-        String controllerPath = controllerBasePath + "/java/" + javaBasePath + packageConfig.getController();
+        String controllerPath = controllerBasePath + "/java/" + packageBasePath + packageConfig.getController();
         String entityPath = javaPath + packageConfig.getEntity();
         String daoPath = javaPath + packageConfig.getMapper();
         String servicePath = javaPath + packageConfig.getService();
         String serviceImplPath = javaPath + packageConfig.getServiceImpl();
 
-        String packagePath = javaBasePath.replace("/", ".");
+        String packagePath = packageBasePath.replace("/", ".");
 
         focList.add(buildFileOutConfig(FileType.XML, cfg, xmlPath + packageConfig.getXml(), packagePath, templateConfig.getXml()));
 

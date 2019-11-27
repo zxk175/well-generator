@@ -18,13 +18,13 @@ import java.util.List;
  * @since 2019-09-05 14:15
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-public class CodeGeneratorTest {
+public class NotifyCodeGenTest {
 
     @Test
     public void generatorProd() {
-        String projectBasePath = MyCodeGenerator.getProjectPathByLevel(PathType.CURRENT, true);
-        String basePath = projectBasePath + "/well-notify/src/main";
-        String javaBasePath = "";
+        String projectBasePath = MyCodeGenerator.getProjectPathByLevel(PathType.ONE, false);
+        String basePath = projectBasePath + "/well-notify/notify-admin/src/main";
+        String packageBasePath = "com/zxk175/notify/module/";
 
         DataSourceConfig dataSourceConfig = new DataSourceConfig();
         dataSourceConfig.setUrl("jdbc:mysql://127.0.0.1:23306/notify_data?useUnicode=true&serverTimezone=Asia/Shanghai");
@@ -33,15 +33,19 @@ public class CodeGeneratorTest {
         dataSourceConfig.setPassword("123456");
 
         MyPackageConfig myPackageConfig = new MyPackageConfig();
+        myPackageConfig.setEntity("pojo");
         myPackageConfig.setMapper(null);
         myPackageConfig.setXml(null);
 
         StrategyConfig strategyConfig = new StrategyConfig();
+        strategyConfig.setSuperControllerClass("com.zxk175.notify.module.controller.BaseController");
 
         GlobalConfig globalConfig = new GlobalConfig();
+        globalConfig.setFileOverride(false);
+        globalConfig.setSwagger2(true);
 
         List<String> include = new ArrayList<>();
 
-        new MyCodeGenerator(basePath, javaBasePath, basePath, "normal", include, dataSourceConfig, myPackageConfig, strategyConfig, globalConfig).init();
+        new MyCodeGenerator(basePath, packageBasePath, basePath, "normal", include, dataSourceConfig, myPackageConfig, strategyConfig, globalConfig).init();
     }
 }
