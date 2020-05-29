@@ -6,7 +6,7 @@ buildscript {
     // 引入jar包定义
     // 这个文件中定义的jar包可以直接在子项目中使用
     // 不需要再次使用 apply from 这个语句
-    apply from: "dependency.gradle"
+    apply from: "depend.gradle"
 
     repositories {
         mavenLocal()

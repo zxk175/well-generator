@@ -3,12 +3,12 @@ ext.versions = [
         project_version  : "1.0.0",
         project_encoding : "UTF-8",
 
-        spring_boot      : "2.2.0.RELEASE",
+        spring_boot      : "2.2.7.RELEASE",
 
         mysql_java       : "8.0.16",
-        boot_mybatis_plus: "3.2.0",
+        boot_mybatis_plus: "3.3.2",
 
-        hutool           : "4.6.8",
+        hutool           : "5.3.5",
 ]
 
 ext.libraries = [

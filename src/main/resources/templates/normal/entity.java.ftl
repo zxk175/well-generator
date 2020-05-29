@@ -161,4 +161,5 @@ public class ${entity} implements Serializable {
         "}";
     }
 </#if>
+
 }

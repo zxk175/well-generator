@@ -23,11 +23,11 @@ public class NotifyCodeGenTest {
     @Test
     public void generatorProd() {
         String projectBasePath = MyCodeGenerator.getProjectPathByLevel(PathType.ONE, false);
-        String basePath = projectBasePath + "/well-notify/notify-admin/src/main";
+        String basePath = projectBasePath + "/well-notify/notify-api/src/main";
         String packageBasePath = "com/zxk175/notify/module/";
 
         DataSourceConfig dataSourceConfig = new DataSourceConfig();
-        dataSourceConfig.setUrl("jdbc:mysql://127.0.0.1:23306/notify_data?useUnicode=true&serverTimezone=Asia/Shanghai");
+        dataSourceConfig.setUrl("jdbc:mysql://127.0.0.1:23306/push_data?useUnicode=true&serverTimezone=Asia/Shanghai");
         dataSourceConfig.setDriverName("com.mysql.cj.jdbc.Driver");
         dataSourceConfig.setUsername("root");
         dataSourceConfig.setPassword("123456");
@@ -41,10 +41,11 @@ public class NotifyCodeGenTest {
         strategyConfig.setSuperControllerClass("com.zxk175.notify.module.controller.BaseController");
 
         GlobalConfig globalConfig = new GlobalConfig();
-        globalConfig.setFileOverride(false);
+        globalConfig.setFileOverride(true);
         globalConfig.setSwagger2(true);
 
         List<String> include = new ArrayList<>();
+        include.add("t_wx_user");
 
         new MyCodeGenerator(basePath, packageBasePath, basePath, "normal", include, dataSourceConfig, myPackageConfig, strategyConfig, globalConfig).init();
     }
