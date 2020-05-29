@@ -76,5 +76,6 @@ public class ${table.controllerName} {
     public Response list${entity}Page(@Validated @RequestBody Object param) {
         return null;
     }
+
 }
 </#if>
